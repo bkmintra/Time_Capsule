@@ -1,0 +1,3 @@
+export default function Art({small=false,tone='purple',open=false}){
+ return <div className={`clay-scene ${small?'small':''} ${tone} ${open?'is-open':''}`} aria-hidden="true"><div className="clay-orbit"/><div className="clay-shadow"/><div className="clay-capsule"><div className="clay-top"><span className="shine"/><span className="capsule-face">˘ ᴗ ˘</span></div><div className="clay-bottom"><span className="clay-sticker">♡</span></div><div className="clay-seam"/></div><span className="clay-star star-one">✦</span><span className="clay-star star-two">✦</span><span className="clay-ball"/><span className="clay-spark">✧</span></div>;
+}

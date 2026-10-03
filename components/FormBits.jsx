@@ -1,0 +1,6 @@
+"use client";
+import {useState} from 'react';import {Eye,EyeOff,LoaderCircle} from 'lucide-react';
+export function Field({name,label,error,children,hint}){return <div className="field"><label htmlFor={name}>{label}</label>{children}{hint&&<small className="field-hint">{hint}</small>}{error&&<p className="field-error" id={`${name}-error`}>{error}</p>}</div>;}
+export function Password({name='password',value,onChange,autoComplete='new-password',error,id}){const [show,setShow]=useState(false);return <div className="password-wrap"><input id={id||name} name={name} type={show?'text':'password'} value={value} onChange={onChange} minLength={8} maxLength={128} required autoComplete={autoComplete} aria-invalid={!!error} aria-describedby={error?`${name}-error`:undefined} placeholder="อย่างน้อย 8 ตัวอักษร"/><button type="button" aria-label={show?'ซ่อนรหัสผ่าน':'แสดงรหัสผ่าน'} onClick={()=>setShow(!show)}>{show?<EyeOff size={17}/>:<Eye size={17}/>}</button></div>;}
+export function Feedback({state}){return <>{state?.error&&<p className="form-error" role="alert">{state.error}</p>}{state?.success&&<p className="form-success" role="status">{state.success}</p>}</>;}
+export function Submit({pending,children}){return <button className="button full" type="submit" disabled={pending}>{pending?<><LoaderCircle size={17} className="spin"/>กำลังบันทึก…</>:children}</button>;}

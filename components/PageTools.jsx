@@ -1,0 +1,4 @@
+"use client";
+import {useEffect} from 'react';
+// Optional browser-native tools. Unsupported browsers simply use the normal UI.
+export default function PageTools(){useEffect(()=>{const context=document.modelContext;if(!context?.registerTool)return;const lifecycle=new AbortController();const tool={name:'start_capsule_creation',title:'Start a new time capsule',description:'Navigate to the capsule creation form. Does not create, open or submit a capsule.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute(input){if(input&&Object.keys(input).length)throw new Error('No arguments accepted');window.location.assign('/capsules/new');return {navigationStarted:true,path:'/capsules/new'};}};try{Promise.resolve(context.registerTool(tool,{signal:lifecycle.signal})).catch(()=>{});}catch{}return()=>lifecycle.abort();},[]);return null;}

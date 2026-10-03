@@ -1,0 +1,1 @@
+"use client";export default function Error({reset}){return <section className="wrap empty-state"><span className="error-symbol">☁</span><h1>สะดุดนิดหน่อย</h1><p>ยังโหลดข้อมูลไม่ได้ ลองอีกครั้งนะ หากยังไม่สำเร็จให้ตรวจการเชื่อมต่อและการตั้งค่าฐานข้อมูล</p><button className="button" onClick={reset}>ลองอีกครั้ง ↻</button></section>;}

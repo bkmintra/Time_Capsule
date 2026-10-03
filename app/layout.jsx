@@ -1,0 +1,4 @@
+import './globals.css';import PageTools from '@/components/PageTools';import Nav from '@/components/Nav';import { user } from '@/lib/auth';import { Heart } from 'lucide-react';
+export const metadata={title:{default:'Campus Time Capsule — ฝากถึงฉันในวันข้างหน้า',template:'%s · Campus Time Capsule'},description:'เขียนถึงตัวเอง ปิดผนึกความทรงจำ แล้วกลับมาเปิดอ่านเมื่อถึงเวลาของมัน',icons:{icon:'/favicon.svg'}};
+export const dynamic='force-dynamic';
+export default async function Layout({children}){const current=await user();return <html lang="th"><body><PageTools/><a className="skip-link" href="#main">ข้ามไปเนื้อหา</a><Nav current={current}/><main id="main">{children}</main><footer className="footer wrap"><span className="footer-brand">timecapsule <Heart size={14}/></span><span>เก็บวันนี้ไว้ให้ตัวเองในวันข้างหน้า</span><span>กลุ่มโตมาชิกูรู · Campus Project</span></footer></body></html>;}

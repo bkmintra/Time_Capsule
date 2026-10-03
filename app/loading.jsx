@@ -1,0 +1,1 @@
+export default function Loading(){return <section className="wrap loading-space" aria-live="polite"><div className="loading-orb"/><h2>กำลังเดินทางไปหาความทรงจำ…</h2><p>รออีกแป๊บเดียวนะ</p></section>;}

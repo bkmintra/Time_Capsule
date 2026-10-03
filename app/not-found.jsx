@@ -1,0 +1,1 @@
+import Link from 'next/link';import Art from '@/components/Art';export default function NotFound(){return <section className="wrap empty-state"><Art small/><span className="eyebrow">404 · LOST IN TIME</span><h1>หลงเวลานิดหน่อย</h1><p>ไม่พบหน้านี้ หรือแคปซูลนี้ไม่ได้เป็นของคุณ</p><Link className="button" href="/capsules">กลับไปหาแคปซูลของฉัน ↗</Link></section>;}

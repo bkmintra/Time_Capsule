@@ -1,0 +1,1 @@
+import {redirect} from 'next/navigation';import {user} from '@/lib/auth';import AuthPage from '@/components/AuthPage';export const metadata={title:'สมัครสมาชิก'};export default async function Register(){if(await user())redirect('/capsules');return <AuthPage register/>;}
