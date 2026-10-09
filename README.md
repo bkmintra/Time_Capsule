@@ -2,6 +2,8 @@
 
 เว็บ React สำหรับฝากข้อความถึงตัวเองในอนาคต ดีไซน์ Y2K ผสม Clay สีครีม ม่วงพาสเทล ชมพู และเขียว พร้อมภาพแคปซูลที่สร้างด้วย CSS ไม่ต้องดาวน์โหลดภาพจากภายนอก
 
+🌐 **Live Demo (Vercel):** [https://time-capsule-six-gules.vercel.app/](https://time-capsule-six-gules.vercel.app/)
+
 ## สมาชิก
 
 กลุ่ม **โตมาชิกูรู**
@@ -90,6 +92,7 @@ SUPABASE_SERVICE_ROLE_KEY=YOUR-SERVICE-ROLE-KEY
 ## Server และ Client
 
 - Next.js App Router เป็น React framework ที่รองรับ Server Components และ Server Actions ตาม proposal
+- **Data Fetching (SSR):** กำหนด `export const dynamic='force-dynamic'` อย่างเจตนาใน `app/layout.jsx` เพื่อใช้ SSR (Server-Side Rendering) ตลอดเวลา เพื่อรับประกันว่าข้อมูล Session ของผู้ใช้และสถานะเวลาของแคปซูลจะถูกดึงมาสดใหม่จาก Server เสมอ ป้องกันปัญหา Stale data ที่อาจทำให้ผู้ใช้เห็นแคปซูลของคนอื่นหรือพยายามเข้าถึงก่อนเวลา
 - `app/**/page.jsx`: ตรวจ session และอ่านข้อมูลฝั่ง server
 - `components/`: ฟอร์ม ตัวกรอง การนับถอยหลัง และ UI ที่มีการโต้ตอบ
 - `app/actions.js`: ตรวจผู้ใช้และสิทธิ์ซ้ำทุก mutation พร้อม Zod validation ไม่เชื่อข้อมูลจาก browser
