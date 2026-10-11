@@ -1,9 +1,105 @@
 "use client";
-import {useActionState,startTransition} from 'react';import Link from 'next/link';import {registerUser,loginUser} from '@/app/actions';import {Field,Password,Feedback,Submit} from './FormBits';
-import { useForm } from 'react-hook-form'; import { zodResolver } from '@hookform/resolvers/zod'; import { registerSchema, loginSchema } from '@/lib/validation';
-import { useUIStore } from '@/lib/storeClient';
-export default function AuthForm({register: isRegister=false}){const [state,action,pending]=useActionState(isRegister?registerUser:loginUser,{});
-const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(isRegister ? registerSchema : loginSchema) });
-const showToast = useUIStore(state => state.showToast);
-const submitForm = (data) => { showToast('กำลังส่งข้อมูล...'); const formData = new FormData(); Object.keys(data).forEach(k => formData.append(k, data[k])); startTransition(() => action(formData)); };
-return <form action={action} onSubmit={handleSubmit(submitForm)} noValidate className="auth-form"><Feedback state={state}/><fieldset disabled={pending}>{isRegister&&<Field name="name" label="อยากให้เราเรียกคุณว่าอะไร?" error={errors.name?.message || state.fields?.name}><input id="name" {...register('name')} placeholder="ชื่อเล่นของคุณ" minLength={2} maxLength={40} autoComplete="nickname" required/></Field>}<Field name="email" label="อีเมล" error={errors.email?.message || state.fields?.email}><input id="email" type="email" {...register('email')} placeholder="you@example.com" maxLength={254} autoComplete="email" required/></Field><Field name="password" label="รหัสผ่านบัญชี" error={errors.password?.message || state.fields?.password}><Password {...register('password')} autoComplete={isRegister?'new-password':'current-password'} error={errors.password?.message || state.fields?.password}/></Field>{isRegister&&<Field name="confirm" label="ยืนยันรหัสผ่าน" error={errors.confirm?.message || state.fields?.confirm}><Password {...register('confirm')} error={errors.confirm?.message || state.fields?.confirm}/></Field>}<Submit pending={pending}>{isRegister?'สร้างบัญชี แล้วเริ่มเก็บความทรงจำ ↗':'เข้าสู่ระบบ →'}</Submit></fieldset><p className="auth-switch">{isRegister?'มีพื้นที่ของตัวเองแล้ว?':'ยังไม่มีบัญชี?'} <Link href={isRegister?'/login':'/register'}>{isRegister?'เข้าสู่ระบบ':'สมัครสมาชิก'}</Link></p></form>;}
+import { useActionState, startTransition } from "react";
+import Link from "next/link";
+import { registerUser, loginUser } from "@/app/actions";
+import { Field, Password, Feedback, Submit } from "./FormBits";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerSchema, loginSchema } from "@/lib/validation";
+import { useUIStore } from "@/lib/storeClient";
+export default function AuthForm({ register: isRegister = false }) {
+  const [state, action, pending] = useActionState(
+    isRegister ? registerUser : loginUser,
+    {},
+  );
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(isRegister ? registerSchema : loginSchema),
+  });
+  const showToast = useUIStore((state) => state.showToast);
+  const submitForm = (data) => {
+    showToast("กำลังส่งข้อมูล...");
+    const formData = new FormData();
+    Object.keys(data).forEach((k) => formData.append(k, data[k]));
+    startTransition(() => action(formData));
+  };
+  return (
+    <form
+      action={action}
+      onSubmit={handleSubmit(submitForm)}
+      noValidate
+      className="auth-form"
+    >
+      <Feedback state={state} />
+      <fieldset disabled={pending}>
+        {isRegister && (
+          <Field
+            name="name"
+            label="อยากให้เราเรียกคุณว่าอะไร?"
+            error={errors.name?.message || state.fields?.name}
+          >
+            <input
+              id="name"
+              {...register("name")}
+              placeholder="ชื่อเล่นของคุณ"
+              minLength={2}
+              maxLength={40}
+              autoComplete="nickname"
+              required
+            />
+          </Field>
+        )}
+        <Field
+          name="email"
+          label="อีเมล"
+          error={errors.email?.message || state.fields?.email}
+        >
+          <input
+            id="email"
+            type="email"
+            {...register("email")}
+            placeholder="you@example.com"
+            maxLength={254}
+            autoComplete="email"
+            required
+          />
+        </Field>
+        <Field
+          name="password"
+          label="รหัสผ่านบัญชี"
+          error={errors.password?.message || state.fields?.password}
+        >
+          <Password
+            {...register("password")}
+            autoComplete={isRegister ? "new-password" : "current-password"}
+            error={errors.password?.message || state.fields?.password}
+          />
+        </Field>
+        {isRegister && (
+          <Field
+            name="confirm"
+            label="ยืนยันรหัสผ่าน"
+            error={errors.confirm?.message || state.fields?.confirm}
+          >
+            <Password
+              {...register("confirm")}
+              error={errors.confirm?.message || state.fields?.confirm}
+            />
+          </Field>
+        )}
+        <Submit pending={pending}>
+          {isRegister ? "สร้างบัญชี แล้วเริ่มเก็บความทรงจำ ↗" : "เข้าสู่ระบบ →"}
+        </Submit>
+      </fieldset>
+      <p className="auth-switch">
+        {isRegister ? "มีพื้นที่ของตัวเองแล้ว?" : "ยังไม่มีบัญชี?"}{" "}
+        <Link href={isRegister ? "/login" : "/register"}>
+          {isRegister ? "เข้าสู่ระบบ" : "สมัครสมาชิก"}
+        </Link>
+      </p>
+    </form>
+  );
+}

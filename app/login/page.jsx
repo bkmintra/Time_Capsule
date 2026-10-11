@@ -1,1 +1,8 @@
-import {redirect} from 'next/navigation';import {user} from '@/lib/auth';import AuthPage from '@/components/AuthPage';export const metadata={title:'เข้าสู่ระบบ'};export default async function Login(){if(await user())redirect('/capsules');return <AuthPage/>;}
+import { redirect } from "next/navigation";
+import { user } from "@/lib/auth";
+import AuthPage from "@/components/AuthPage";
+export const metadata = { title: "เข้าสู่ระบบ" };
+export default async function Login() {
+  if (await user()) redirect("/capsules");
+  return <AuthPage />;
+}
